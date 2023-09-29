@@ -12,7 +12,6 @@ public class GenerateBurger {
         int size = Utils.rnd(s.size());
         for (int i = 1; i < size; i++){
             int k = Utils.rnd(s.size()-1);
-            //newBurger.add("\"" + s.get(k) + "\"");
             newBurger.add(s.get(k));
         }
         return newBurger;

@@ -29,10 +29,10 @@ public class OrdersTest {
 
     @Test
     public void makeOrderWithLogin(){
-        GenerateUser newUser = new GenerateUser();
+
         UserActionsList create = new UserActionsList();
-        JUser testUser = newUser.randomUser();
-        Response response = create.createUser(testUser);
+        JUser testUser = GenerateUser.randomUser();
+        create.createUser(testUser);
         Response userLogin = create.loginUser(UserCreds.credsFrom(testUser));
         GenerateBurger generateBurger = new GenerateBurger();
         generateBurger.generateIngridientsList(create.getIngridientsList());
@@ -72,10 +72,9 @@ public class OrdersTest {
 
     @Test
     public void getUserOrdersWithLogin(){
-        GenerateUser newUser = new GenerateUser();
         UserActionsList create = new UserActionsList();
-        JUser testUser = newUser.randomUser();
-        Response response = create.createUser(testUser);
+        JUser testUser = GenerateUser.randomUser();
+        create.createUser(testUser);
         Response userLogin = create.loginUser(UserCreds.credsFrom(testUser));
         Response orders = create.getUserOrdersWithLogin(create.getToken(userLogin));
         assertEquals(200, orders.statusCode());

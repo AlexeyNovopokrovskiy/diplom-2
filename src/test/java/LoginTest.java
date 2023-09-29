@@ -19,10 +19,10 @@ public class LoginTest {
 
     @Test
     public void loginUser(){
-        GenerateUser newUser = new GenerateUser();
+
         UserActionsList create = new UserActionsList();
-        JUser testUser = newUser.randomUser();
-        Response response = create.createUser(testUser);
+        JUser testUser = GenerateUser.randomUser();
+        create.createUser(testUser);
         Response userLogin = create.loginUser(UserCreds.credsFrom(testUser));
         assertEquals(200, userLogin.statusCode());
 
@@ -34,10 +34,9 @@ public class LoginTest {
     }
     @Test
     public void loginUserWrongEmail(){
-        GenerateUser newUser = new GenerateUser();
         UserActionsList create = new UserActionsList();
-        JUser testUser = newUser.randomUser();
-        Response response = create.createUser(testUser);
+        JUser testUser = GenerateUser.randomUser();
+        create.createUser(testUser);
         Response userLogin = create.loginUser(UserCreds.credsChangedEmail(testUser));
         assertEquals(401, userLogin.statusCode());
         userLogin.then().assertThat().body("message", equalTo("email or password are incorrect"));
@@ -48,10 +47,9 @@ public class LoginTest {
     }
     @Test
     public void loginUserWrongPassword(){
-        GenerateUser newUser = new GenerateUser();
         UserActionsList create = new UserActionsList();
-        JUser testUser = newUser.randomUser();
-        Response response = create.createUser(testUser);
+        JUser testUser = GenerateUser.randomUser();
+        create.createUser(testUser);
         Response userLogin = create.loginUser(UserCreds.credsChangedPassword(testUser));
         assertEquals(401, userLogin.statusCode());
         userLogin.then().assertThat().body("message", equalTo("email or password are incorrect"));
